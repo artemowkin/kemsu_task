@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}KemSU Test Task{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <a href="{% url 'create_entry' %}">Создать Запись</a>
+            <a href="{% url 'all_entries' %}">Посмотреть Записи</a>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>
