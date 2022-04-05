@@ -23,7 +23,7 @@ def _prepare_entry(entry_data: dict) -> dict:
     return entry
 
 
-def create_entry_in_csv(entry_data: dict):
+def create_entry_in_csv(entry_data: dict) -> str:
     """
     Создает запись в CSV файле на основе полученных от пользователя
     валидированных данных
@@ -34,6 +34,8 @@ def create_entry_in_csv(entry_data: dict):
         writer = csv.DictWriter(csvfile, fieldnames=CSV_FIELDNAMES)
         if open_mode == 'w': writer.writeheader()
         writer.writerow(entry)
+
+    return str(entry['id'])
 
 
 def _restruct_entry(entry_data) -> dict:

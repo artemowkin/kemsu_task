@@ -17,9 +17,12 @@ class CreateEntryView(View):
         """Обработка данных, полученных от формы в POST запросе"""
         form = EntryForm(request.POST)
         if form.is_valid():
-            create_entry_in_csv(form.cleaned_data)
+            created_entry_id = create_entry_in_csv(form.cleaned_data)
             empty_form = EntryForm()
-            return render(request, 'create.html', {'form': empty_form})
+            message = f"Добавлена запись ID={created_entry_id}"
+            return render(request, 'create.html', {
+                'form': empty_form, 'message': message
+            })
 
         return render(request, 'create.html', {'form': form})
 
