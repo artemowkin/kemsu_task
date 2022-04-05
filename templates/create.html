@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if message %}<h1>{{ message }}</h1>{% endif %}
+    {% if message %}<h3 class="complete_message">{{ message }}</h3>{% endif %}
+    {% if errors %}
+    {% for error in errors %}
+    <h3 class="error_message">{{ error }}</h3>
+    {% endfor %}
+    {% endif %}
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create</button>
+        <p>Название: <input name="title" type="text" required value="{{ form.title.value }}"></p>
+        <p>Вес: <input name="weight" type="number" required value="{{ form.weight.value }}"></p>
+        <p>Цвет: <select name="color">
+            <option value="красный" {% if form.color.value == 'красный' %}selected{% endif %}>Красный</option>
+            <option value="зеленый" {% if form.color.value == 'зеленый' %}selected{% endif %}>Зеленый</option>
+            <option value="синий" {% if form.color.value == 'синий' %}selected{% endif %}>Синий</option>
+        </select></p>
+        <button type="submit">Сохранить</button>
     </form>
 {% endblock %}
