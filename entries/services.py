@@ -10,6 +10,10 @@ CSV_FIELDNAMES = ['id', 'Название', 'Вес', 'Цвет']
 
 
 def _prepare_entry(entry_data: dict) -> dict:
+    """
+    Подготавливает данные к сохранению в CSV файл: меняет названия
+    полей на русские
+    """
     entry = {}
     entry_id = uuid4()
     entry['id'] = entry_id
@@ -20,6 +24,10 @@ def _prepare_entry(entry_data: dict) -> dict:
 
 
 def create_entry_in_csv(entry_data: dict):
+    """
+    Создает запись в CSV файле на основе полученных от пользователя
+    валидированных данных
+    """
     entry = _prepare_entry(entry_data)
     open_mode = 'a' if CSV_DB_PATH.exists() else 'w'
     with open(CSV_DB_PATH, open_mode, newline='') as csvfile:
@@ -29,6 +37,10 @@ def create_entry_in_csv(entry_data: dict):
 
 
 def _restruct_entry(entry_data) -> dict:
+    """
+    Изменяет названия полей на английские в полученной из CSV файла записи
+    для удобства взаимодействия с этой записью в других частях программы
+    """
     entry = {}
     entry['id'] = entry_data['id']
     entry['title'] = entry_data['Название']
@@ -38,6 +50,7 @@ def _restruct_entry(entry_data) -> dict:
 
 
 def get_all_csv_entries() -> list[dict | None]:
+    """Возвращает все записи из csv файла"""
     if not CSV_DB_PATH.exists: return []
     with open(CSV_DB_PATH, newline='') as csvfile:
         reader = csv.DictReader(csvfile)

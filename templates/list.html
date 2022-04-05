@@ -2,11 +2,11 @@
 
 {% block content %}
     {% for entry in entries %}
-    <div class="entry">
+    <section class="entry">
         <p>ID: {{ entry.id }}</p>
         <p>Название: {{ entry.title }}</p>
         <p>Вес: {{ entry.weight }}</p>
         <p>Цвет: {{ entry.color }}</p>
-    </div>
+    </section>
     {% endfor %}
 {% endblock %}
