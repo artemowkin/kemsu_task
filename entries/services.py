@@ -53,7 +53,7 @@ def _restruct_entry(entry_data) -> dict:
 
 def get_all_csv_entries() -> list[dict | None]:
     """Возвращает все записи из csv файла"""
-    if not CSV_DB_PATH.exists: return []
+    if not CSV_DB_PATH.exists(): return []
     with open(CSV_DB_PATH, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         return [_restruct_entry(row) for row in reader]
